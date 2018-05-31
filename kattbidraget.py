@@ -17,8 +17,7 @@ class Ansokan(Resource):
         ansokan = request.get_json()
         return {'ansokan': ansokan, 'signatur': ''.join(random.choices(string.ascii_uppercase + string.digits, k=512))}, 201
 
-api.add_resource(Ansokan, '/')
-api.add_resource(Ansokan, '/signera')
+api.add_resource(Ansokan, '/ansokan')
 
 if __name__ == '__main__':
    application.run()
