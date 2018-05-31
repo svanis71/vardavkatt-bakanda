@@ -1,13 +1,24 @@
 #!/usr/bin/env python3
+import random
+import string
 
-from flask import Flask
+from flask import Flask, request
+from flask_restful import Resource, Api
 
-app = Flask(__name__)
+application = Flask(__name__)
+api = Api(application)
 
-@app.route('/')
-def hello_world():
-       s = 'Hello World'
-       return s
+
+class Ansokan(Resource):
+    def get(self):
+        return {'namn': '', 'alder': '', 'franDatum': '', 'tomDatum': '', 'orsak': []}, 200
+
+    def post(self):
+        ansokan = request.get_json()
+        return {'ansokan': ansokan, 'signatur': ''.join(random.choices(string.ascii_uppercase + string.digits, k=512))}, 201
+
+api.add_resource(Ansokan, '/')
+api.add_resource(Ansokan, '/signera')
 
 if __name__ == '__main__':
-   app.run()
+   application.run()
