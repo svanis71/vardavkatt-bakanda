@@ -17,8 +17,11 @@ class Ansokan(Resource):
         return {'namn': '', 'alder': '', 'franDatum': '', 'tomDatum': '', 'orsak': []}, 200
 
     def post(self):
+        print('POST!!')
+        print(request)
         ansokan = request.get_json()
-        return {'ansokan': ansokan, 'signatur': ''.join(random.choices(string.ascii_uppercase + string.digits, k=512))}, 201
+        print(ansokan['namn'])
+        return {'ansokan': {'namn': 'smilla'}, 'signatur': ''.join(random.choices(string.ascii_uppercase + string.digits, k=512))}, 201
 
 api.add_resource(Ansokan, '/ansokan')
 
